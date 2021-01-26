@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lesson.css">
+</head>
+<body>
+    <p id="winGame"></p>
+    <ul id="listCont" class="listCont">
+        <li >  <button id="btn0" value="0" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn1" value="1" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn2" value="2" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn3" value="3" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn4" value="4" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn5" value="5" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn6" value="6" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn7" value="7" onclick="clickHandler(value)"></button>  </li>
+        <li >  <button id="btn8" value="8" onclick="clickHandler(value)"></button>  </li>
+    </ul>
+
+    <script>
+        var gameList = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0, 0]
+        var ourValue = "X"
+        var checker = 0
+        var gameWinnerChecker = 0
+        const clickHandler = (num) => {
+            if (gameList[num] === 0) {
+                document.getElementById(`btn${num}`).innerHTML = ourValue
+                if(checker===0)
+                {
+                    checker=1
+                    ourValue = "O"
+                    gameList[num] = 2
+                    
+
+                }               
+                else if(checker===1)
+                {
+                    checker=0
+                    ourValue = "X"
+                    gameList[num] = 4
+                }               
+                for (let i = 0 , j=0 , k=0; i < 9 , j<9 , k<9; i++, j++, k++) {
+                    if ((gameList[i]===2 && gameList[i+1]===2 && gameList[i+2]===2)) {
+                        console.log("Player X Win")
+                        gameWinnerChecker = 2
+                    }
+                    else if  ((gameList[i]===4 && gameList[i+1]===4 && gameList[i+2]===4) )
+                    {
+                        console.log("Player O Win")
+                        gameWinnerChecker = 4
+                    }
+                    if ((gameList[i]===2 && gameList[i+3]===2 && gameList[i+6]===2)) {
+                        console.log("Player X Win")
+                        gameWinnerChecker = 2
+                    }
+                    else if  ((gameList[i]===4 && gameList[i+3]===4 && gameList[i+6]===4) )
+                    {
+                        console.log("Player O Win")
+                        gameWinnerChecker = 4
+                    }
+                    if ((gameList[i]===2 && gameList[i+4]===2 && gameList[i+8]===2)) {
+                        console.log("Player X Win")
+                        gameWinnerChecker = 2
+                    }
+                    else if  ((gameList[i]===4 && gameList[i+4]===4 && gameList[i+8]===4) )
+                    {
+                        console.log("Player O Win")
+                        gameWinnerChecker = 4
+                    }
+                    }
+                if (gameWinnerChecker ===1) {
+                    for (let i = 0; i < 9; i++) {
+                        document.getElementById(`btn${i}`).disabled =true
+                    }
+                    document.getElementById('winGame').innerHTML = "You Win"
+                }
+            }
+        }
+        
+        
+    </script>
+</body>
+</html>
